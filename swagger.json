@@ -1,0 +1,261 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Product",
+    "description": "My Product Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Products",
+      "description": "API for Products"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+    }
+},
+  "paths": {
+    "/products/add": {
+      "post": {
+        "security": [ { "Bearer": [] } ],
+        "tags": [
+          "Products"
+        ],
+        "description": "Create new Product",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Product that you want to create",
+            "schema": {
+              "$ref": "#/definitions/ProductReq"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Product is created",
+            "schema": {
+              "$ref": "#/definitions/ProductsRes"
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "security": [ { "Bearer": [] } ],
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get all products",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductsRes"
+            }
+          }
+        }
+      }
+    },
+    "/products/{pId}": {
+      "parameters": [
+        {
+          "name": "pId",
+          "in": "path",
+          "required": true,
+          "description": "pId of product",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "security": [ { "Bearer": [] } ],
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get product with given pId",
+        "responses": {
+          "200": {
+            "description": "product is found",
+            "schema": {
+              "$ref": "#/definitions/ProductRes"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [ { "Bearer": [] } ],
+        "summary": "Delete product with given pId",
+        "tags": [
+          "Products"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product is deleted",
+            "schema": {
+              "$ref": "#/definitions/deleteProductRes"
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [ { "Bearer": [] } ],
+        "summary": "Update product with give pId",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Product with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/updateProductReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product is updated",
+            "schema": {
+              "$ref": "#/definitions/updateProductRes"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductReq": {
+      "required": [
+        "storeName",
+        "pId",
+        "pName"
+      ],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "storeName": {
+            "type": "string"
+          },
+          "pId": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "pName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updateProductReq": {
+      "properties": {
+        "storeName": {
+          "type": "string"
+        },
+        "pName": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductsRes": {
+      "required": [
+        "storeName",
+        "pId",
+        "pName"
+      ],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "1995-09-07T10:40:52Z",
+            "format": "date-time"
+          },
+          "storeName": {
+            "type": "string"
+          },
+          "pId": {
+            "type": "integer",
+            "uniqueItems": true
+          },
+          "pName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProductRes": {
+      "required": [
+        "storeName",
+        "pId",
+        "pName"
+      ],
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "example": "1995-09-07T10:40:52Z",
+          "format": "date-time"
+        },
+        "storeName": {
+          "type": "string"
+        },
+        "pId": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "pName": {
+          "type": "string"
+        }
+      }
+    },
+    "updateProductRes": {
+      "properties": {
+        "pId": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteProductRes": {
+      "properties": {
+        "pId": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

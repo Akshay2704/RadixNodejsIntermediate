@@ -1,0 +1,18 @@
+{
+    "client": {
+        "id": "384122148005-40vr06rh5s935ggkkvf5klr0882n0pmm.apps.googleusercontent.com",
+        "secret": "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",
+        "redirect": "http://localhost:5000/auth/google/callback"
+    },
+
+    "web":{
+    "client_id":"384122148005-40vr06rh5s935ggkkvf5klr0882n0pmm.apps.googleusercontent.com",
+    "project_id":"velvety-matter-305607",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"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",
+    "redirect_uris":["http://localhost:5000/auth/google/callback"],
+    "javascript_origins":["http://localhost:5000"]
+    }
+}
